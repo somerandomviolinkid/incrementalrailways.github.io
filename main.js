@@ -19,11 +19,6 @@ function buyLocomotive(locomotiveName) {
     }
 }
 
-
-
-//updates route div with route info
-
-
 let routeNumber = 0;
 
 //switches between routes
@@ -44,10 +39,12 @@ class newRoute {
     }
 }
 
+//updates route info
 function updateRoutePage() {
     document.getElementById("routeTitle").innerHTML = routes[routeNames[routeNumber]].name;
     document.getElementById("locomotiveCount").innerHTML = "Locomotives: " + routes[routeNames[routeNumber]].locomotives;
     document.getElementById("freightCarCount").innerHTML = "Freight cars: " + routes[routeNames[routeNumber]].freightCars;
+    document.getElementById("allocatedFuelCount").innerHTML = "Allocated fuel: " + routes[routeNames[routeNumber]].allocatedFuel;
 }
 
 //creates new routes
@@ -59,7 +56,7 @@ function createRoute(name, displayedName, distance, carType, buttonName) {
         //update routes index
         routeNames[routeNames.length] = name;
         routes[name] = new newRoute(displayedName, distance, carType, 0, 0, 0);
-        
+
         //hide button
         document.getElementById(buttonName).style.display = "none";
         //show routeinfo screen
@@ -74,11 +71,26 @@ function createRoute(name, displayedName, distance, carType, buttonName) {
 }
 
 //adds locomotives to selected routes (adding locomotives grants diminishing returns to maximum car amount and top speed)
-function addLocomotive(amount) {
-    
+function addLocomotive(type) {
+    if (data.rollingStock.locomotives[type].available >= 1) {
+        data.rollingStock.locomotives[type].available--;
+        routes[routeNames[routeNumber]].locomotives++;
+        updateResources();
+        updateRoutePage();
+    }
+}
+
+function removeLocomotive(type) {
+    if (routes[routeNames[routeNumber]].locomotives >= 1) {
+        data.rollingStock.locomotives[type].available++;
+        routes[routeNames[routeNumber]].locomotives--;
+        updateResources();
+        updateRoutePage();
+    }
 }
 
 function depleteFuel(routeName) {
 
 }
+
 
