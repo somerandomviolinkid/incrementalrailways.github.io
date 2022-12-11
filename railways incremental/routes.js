@@ -1,2 +1,0 @@
-let routeNames = []
-let routes = {}
