@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<header>
+    <title>bobby's railway game</title>
+    <link rel="stylesheet" href="stylesheet.css">
+</header>
+
+<body>
+    <div class="mainDiv">
+        <h2>Shop</h2>
+        <button onclick="buyLocomotive('d1000')">Buy d1000 locomotive<br>Costs $500,000</button>
+    </div>
+    <div class="mainDiv">
+        <h2>Routes</h2>
+        <button id="route1Button"
+            onclick="createRoute('coalMineToPowerPlant', 'Coal mine to power plant', 30, 'hopper', 'route1Button')">Create
+            route from coal mine to power plant!<br>30 km, hopper cars<br>Costs: $30,000</button>
+        <div id="routeInfo" class="subDiv">
+            <h3 id="routeTitle"></h3>
+
+            <div class="routeStockDiv">
+                <p id="locomotiveCount" class="routeInfoP"></p>
+                <button class="addRollingStockButton" onclick="addLocomotive(1)">+</button>
+                <button class="addRollingStockButton" onclick="addLocomotive(-1)">-</button>
+            </div>
+
+            <div class="routeStockDiv">
+                <p id="freightCarCount" class="routeInfoP"></p>
+                <button class="addRollingStockButton">+</button>
+                <button class="addRollingStockButton">-</button>
+            </div>
+        </div>
+    </div>
+    <div class="mainDiv">
+        <h2>Rolling stock</h2>
+        <div class="subDiv">
+            <p id="d1000TotalCount" class="stuffCount"></p>
+            <p id="d1000AvailableCount" class="stuffCount"></p>
+        </div>
+    </div>
+    <div class="mainDiv">
+        <h2>Resources</h2>
+        <div class="subDiv">
+            <p id="moneyCount" class="stuffCount"></p>
+            <p id="fuelCount" class="stuffCount"></p>
+        </div>
+    </div>
+    <div class="mainDiv">
+        <h2>Railyard</h2>
+    </div>
+    <div id="settingsDiv" class="mainDiv">
+        <h2>Settings</h2>
+        <button class="settingButton" onclick="saveData()">Save data</button>
+        <button class="settingButton" onclick="resetData()">Reset data</button>
+        <button class="settingButton" onclick="downloadData()">Export data</button>
+        <button class="settingButton" onclick="uploadData()">Import data</button>
+    </div>
+
+</body>
+
+<script src="data.js"></script>
+<script src="routes.js"></script>
+<script src="main.js"></script>
+<script src="rollingStockStats.js"></script>
+<script src="saving.js"></script>
+
+</html>
