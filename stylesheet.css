@@ -13,7 +13,7 @@ body {
     display: inline;
     float: left;
     padding: 8px;
-    width: 16.25%;
+    width: 20%;
     margin: 0 0 0 0;
 }
 
@@ -24,7 +24,7 @@ body {
 }
 
 .subDiv {
-    border-radius: 10%;
+    border-radius: 5%;
     border-color: black;
     border-style: solid;
     width: 90%;
@@ -32,6 +32,7 @@ body {
     background-color: darkgray;
     padding: 8px;
     text-align: right;
+    margin: auto;
 }
 
 .stuffCount {
@@ -69,18 +70,19 @@ button:hover {
 }
 
 .routeInfoP {
-    font-size: 24px;
-    float: left;
+    font-size: 20px;
     display: inline;
     font-family: 'Courier New', Courier, monospace;
+    margin: 0;
 }
 
 .addRollingStockButton {
-    padding: 4px;
+    padding: 0;
     float: right;
     display: inline;
     margin: 0;
     width: 10%;
+    height: 80%;
     text-align: center;
 }
 
@@ -89,10 +91,29 @@ button:hover {
     display: none;
     height: fit-content;
     text-align: left;
+    padding: 12px;
 }
 
 .settingButton {
     margin:auto;
     width: 90%;
     display: block;
+}
+
+.subRouteDiv {
+    width: 98%;
+    border-color: black;
+    border-style: solid;
+    border-radius: 5%;
+    background-color: cadetblue;
+    margin: auto;
+    height: fit-content;
+    padding: 4px;
+    height: 50px;
+}
+
+#routeControlButton {
+    width: 95%;
+    margin: auto;
+    padding: 5px;
 }
