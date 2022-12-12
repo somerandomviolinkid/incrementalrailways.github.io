@@ -67,6 +67,12 @@ function depleteFuel() {
     updateRoutePage();
 }
 
+function gainProfit() {
+    //profits!!
+    data.resources.money += 5000 * routes[routeNames[routeNumber]].freightCars;
+    updateResources();
+}
+
 //load train
 function loadTrain() {
     hideRollingStockButtons();
@@ -116,10 +122,7 @@ function unloadTrain() {
     }
 
     setTimeout(nextTask, rollingStockStats.freightCarStats[routes[routeNames[routeNumber]].carType].unloadingTime * 1000);
-
-    //profits!!
-    data.resources.money += 5000 * routes[routeNames[routeNumber]].freightCars;
-    updateResources();
+    setTimeout(gainProfit, rollingStockStats.freightCarStats[routes[routeNames[routeNumber]].carType].unloadingTime * 1000);
 }
 
 //dispatch train back home
