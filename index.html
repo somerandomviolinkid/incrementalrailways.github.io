@@ -14,19 +14,19 @@
         </div>
         <div class="subDiv">
             <h3>Freight cars</h3>
-            <button class="shopButton">Buy hopper car<br>Costs $120,000</button>
+            <button onclick="buyFreightCar('hopperCar')" class="shopButton">Buy hopper car<br>Costs $120,000</button>
         </div>
 
         <div class="subDiv">
             <h3>Fuel</h3>
-            <button class="shopButton">Buy 1,000 liters of fuel<br>Costs $10,000</button>
+            <button onclick="buyFuel(1000)" class="shopButton">Buy 1,000 liters of fuel<br>Costs $10,000</button>
         </div>
     </div>
     <div class="mainDiv">
         <h2>Routes</h2>
         <button id="route1Button"
-            onclick="createRoute('coalMineToPowerPlant', 'Coal mine to power plant', 30, 'hopper', 'route1Button')">Create
-            route from coal mine to power plant!<br>30 km, hopper cars<br>Costs: $30,000</button>
+            onclick="createRoute('coalMineToPowerPlant', 'Coal mine to power plant', 30, 'hopperCar', 'route1Button')">Create
+            route from coal mine to power plant!<br>30 km, hopper cars<br>Costs: $60,000</button>
         <div id="routeInfo" class="subDiv">
             <h3 id="routeTitle"></h3>
             <p id="routeLegnth"></p>
@@ -39,18 +39,23 @@
 
             <div class="subRouteDiv">
                 <p id="freightCarCount" class="routeInfoP"></p>
-                <button class="addRollingStockButton">+</button>
-                <button class="addRollingStockButton">-</button>
+                <button class="addRollingStockButton" onclick="addFreightCar('hopperCar')">+</button>
+                <button class="addRollingStockButton" onclick="removeFreightCar('hopperCar')">-</button>
             </div>
 
             <div class="subRouteDiv">
                 <p id="allocatedFuelCount" class="routeInfoP"></p>
-                <button class="addRollingStockButton">+</button>
-                <button class="addRollingStockButton">-</button>
+                <button class="addRollingStockButton" onclick="allocateFuel(1000)">+</button>
             </div>
 
-            <div class="subRouteDiv">
-                <button id="routeControlButton">Dispatch locomotive</button>
+            <div class="subRouteDiv" id="routeControlDiv">
+                <button id="routeStep1" onclick="loadTrain()" class="routeControlButton">Load train</button>
+                <button id="routeStep2" onclick="dispatchTrain1()" class="routeControlButton">Dispatch train</button>
+                <button id="routeStep3" onclick="trainTravel1()" class="routeControlButton">Drive train</button>
+                <button id="routeStep4" onclick="unloadTrain()" class="routeControlButton">Unload train</button>
+                <button id="routeStep5" onclick="dispatchTrain2()" class="routeControlButton">Dispatch train</button>
+                <button id="routeStep6" onclick="trainTravel2()" class="routeControlButton">Drive train</button>
+                <p id="countdownTimer"></p>
             </div>
         </div>
     </div>
@@ -59,6 +64,9 @@
         <div class="subDiv">
             <p id="d1000TotalCount" class="stuffCount"></p>
             <p id="d1000AvailableCount" class="stuffCount"></p>
+            <hr>
+            <p id="hopperCarTotalCount" class="stuffCount"></p>
+            <p id="hopperCarAvailableCount" class="stuffCount"></p>
         </div>
     </div>
     <div class="mainDiv">
@@ -74,6 +82,13 @@
         <button class="settingButton" onclick="resetData()">Reset data</button>
         <button class="settingButton" onclick="downloadData()">Export data</button>
         <button class="settingButton" onclick="uploadData()">Import data</button>
+        <div class="subDiv">
+            <h3>Things to note!!</h3>
+            <p id="info">You can only start utilizing a route after you have assigned at least 1 locomotive and 1 freight car and allocated some fuel to it.</p>
+            <div id="subNoteworthyDiv" target="_blank">
+                <a href="https://discord.gg/JYCJGyaZRJ">Discord</a>
+            </div>
+        </div>
     </div>
 
 </body>
@@ -83,7 +98,7 @@
 <script src="main.js"></script>
 <script src="rollingStockStats.js"></script>
 <script src="saving.js"></script>
-<script src="init.js"></script>
 <script src="train.js"></script>
+<script src="init.js"></script>
 
 </html>
