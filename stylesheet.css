@@ -7,20 +7,21 @@ body {
 .mainDiv {
     border-color: black;
     border-style: solid;
-    border-radius: 5%;
+    border-radius: 10px;
     border-width: 1px;
     background-color: lightgray;
     display: inline;
     float: left;
     padding: 8px;
-    width: 20%;
+    width: 20.5%;
     margin: 0 0 0 0;
 }
 
 #settingsDiv {
-    width: 10%;
+    width: 12.5%;
     float: right;
-    background-color:aliceblue;
+    background-color: aliceblue;
+    padding: 8px;
 }
 
 .subDiv {
@@ -95,7 +96,7 @@ button:hover {
 }
 
 .settingButton {
-    margin:auto;
+    margin: auto;
     width: 90%;
     display: block;
 }
@@ -104,7 +105,7 @@ button:hover {
     width: 98%;
     border-color: black;
     border-style: solid;
-    border-radius: 5%;
+    border-radius: 5px;
     background-color: cadetblue;
     margin: auto;
     height: fit-content;
@@ -112,8 +113,51 @@ button:hover {
     height: 50px;
 }
 
-#routeControlButton {
-    width: 95%;
+#routeControlDiv {
+    display: none;
+    height: fit-content;
+    padding: 4px;
+    border-color: black;
+    border-style: solid;
+    border-radius: 5px;
+    background-color: slategray;
+}
+
+.routeControlButton {
+    width: fit-content;
+    height: fit-content;
     margin: auto;
+    font-size: 20px;
     padding: 5px;
+    display: none;
+}
+
+#countdownTimer {
+    font-size: 20px;
+    font-family: 'Courier New', Courier, monospace;
+    text-align: center;
+}
+
+#info {
+    font-size: 18px;
+    font-family: 'Courier New', Courier, monospace;
+    text-align: center;
+}
+
+.shopButton {
+    font-size: 15px;
+    padding: 4px;
+    margin: auto;
+    display: inline;
+    width: 48.75%;
+}
+
+a {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 24px;
+    margin: auto;
+}
+
+#subNoteworthyDiv {
+    text-align: center;
 }
