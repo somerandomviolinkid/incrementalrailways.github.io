@@ -1,6 +1,8 @@
 # incrementalrailways.github.io
 incremental train game
 
+discord: https://discord.gg/JYCJGyaZRJ
+
 important things to note!!
 
 fuel efficiency = fuel used for every tonne-kilometer, eg: fuel usage of 300 = 1 tonne can be carried 300 kilometers per liter of fuel
