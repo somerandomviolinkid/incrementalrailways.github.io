@@ -17,19 +17,41 @@ function showRollingStockButtons() {
 //puts page back in original state
 function returnTrain() {
     showRollingStockButtons();
-    currentStep = 0;
+    routes[routeNames[routeNumber]].currentStep = 0;
     document.getElementById("routeStep1").style.display = "inline";
 }
 
-let currentStep = 0;
-
 //cycles through steps
-function nextTask() {
-    const routeControlButtons = document.getElementsByClassName("routeControlButton");
-    routeControlButtons[currentStep].style.display = "none";
-    currentStep++;
 
-    routeControlButtons[currentStep].style.display = "inline";
+let currentDisplayStep;
+let currentStepString;
+let currentButton;
+let currentButtonString;
+const routeStep = "routeStep";
+
+function nextCurrentButton() {
+
+    currentDisplayStep = routes[routeNames[routeNumber]].currentStep + 1;
+    currentStepString = currentDisplayStep.toString();
+    currentButton = routeStep.concat(currentStepString);
+    currentButtonString = currentButton.toString();
+    console.log(currentButtonString);
+}
+
+function nextTask() {
+
+    nextCurrentButton();
+    document.getElementById(currentButtonString).style.display = "none";
+
+    routes[routeNames[routeNumber]].currentStep++;
+
+    if (routes[routeNames[routeNumber]].currentStep >= 7) {
+        routes[routeNames[routeNumber]].currentStep = 0;
+    }
+
+    nextCurrentButton();
+
+    document.getElementById(currentButtonString).style.display = "inline";
 }
 
 let countdownID;
@@ -69,7 +91,7 @@ function depleteFuel() {
 
 function gainProfit() {
     //profits!!
-    data.resources.money += 5000 * routes[routeNames[routeNumber]].freightCars;
+    data.resources.money += (rollingStockStats.freightCarStats[routes[routeNames[routeNumber]]].maxWeight - rollingStockStats.freightCarStats[routes[routeNames[routeNumber]]].weight * routes[routeNames[routeNumber]].freightCars * 10);
     updateResources();
 }
 
