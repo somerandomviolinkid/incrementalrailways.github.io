@@ -83,8 +83,14 @@ function countdown(time) {
     }
 }
 
-//depletes train fuel
-function depleteFuel() {
+//depletes train fuel for first trip
+function depleteFuel1() {
+    routes[routeNames[routeNumber]].allocatedFuel -= (1 / (rollingStockStats.locomotiveStats.d1000.fuelEfficiency * (Math.log(routes[routeNames[routeNumber]].locomotives) + 1))) * ((rollingStockStats.locomotiveStats.d1000.weight * routes[routeNames[routeNumber]].locomotives) + ((rollingStockStats.freightCarStats[routes[routeNames[routeNumber]].carType].maxWeight - rollingStockStats.freightCarStats[routes[routeNames[routeNumber]].carType].weight) * routes[routeNames[routeNumber]].freightCars));
+    updateRoutePage();
+}
+
+//depletes train fuel for second trip
+function depleteFuel2() {
     routes[routeNames[routeNumber]].allocatedFuel -= (1 / (rollingStockStats.locomotiveStats.d1000.fuelEfficiency * (Math.log(routes[routeNames[routeNumber]].locomotives) + 1))) * ((rollingStockStats.locomotiveStats.d1000.weight * routes[routeNames[routeNumber]].locomotives) + (rollingStockStats.freightCarStats[routes[routeNames[routeNumber]].carType].weight * routes[routeNames[routeNumber]].freightCars));
     updateRoutePage();
 }
@@ -127,8 +133,8 @@ function trainTravel1() {
     if (!countdownID) {
         countdown((routes[routeNames[routeNumber]].legnth * 60) / rollingStockStats.locomotiveStats.d1000.topSpeed);
         countdownID = setInterval(countdown, 1000, ((routes[routeNames[routeNumber]].legnth * 60) / rollingStockStats.locomotiveStats.d1000.topSpeed));
-        depleteFuel();
-        depleteFuelID = setInterval(depleteFuel, 1000);
+        depleteFuel1();
+        depleteFuelID = setInterval(depleteFuel1, 1000);
     }
 
     setTimeout(nextTask, (((routes[routeNames[routeNumber]].legnth) * 60000) / (rollingStockStats.locomotiveStats.d1000.topSpeed)));
@@ -166,8 +172,8 @@ function trainTravel2() {
     if (!countdownID) {
         countdown((routes[routeNames[routeNumber]].legnth * 60) / rollingStockStats.locomotiveStats.d1000.topSpeed);
         countdownID = setInterval(countdown, 1000, ((routes[routeNames[routeNumber]].legnth * 60) / rollingStockStats.locomotiveStats.d1000.topSpeed));
-        depleteFuel();
-        depleteFuelID = setInterval(depleteFuel, 1000);
+        depleteFuel2();
+        depleteFuelID = setInterval(depleteFuel2, 1000);
     }
 
     setTimeout(returnTrain, (((routes[routeNames[routeNumber]].legnth) * 60000) / (rollingStockStats.locomotiveStats.d1000.topSpeed)));
