@@ -1,4 +1,4 @@
-//checks if player has created first route and then hides/shows stuff
+nextCurrentButton();
 
 if (routeNames.length == 1) {
     document.getElementById("route1Button").style.display = "none";
@@ -6,10 +6,12 @@ if (routeNames.length == 1) {
 
     if (routes[routeNames[routeNumber]].locomotives >= 1 && routes[routeNames[routeNumber]].freightCars >= 1 && routes[routeNames[routeNumber]].allocatedFuel >= 100) {
         document.getElementById("routeControlDiv").style.display = "block";
-        document.getElementById("routeStep1").style.display = "inline";
+        nextCurrentButton();
+        document.getElementById(currentButtonString).style.display = "inline";
     } else {
         document.getElementById("routeControlDiv").style.display = "none"; 
     }
 
     updateRoutePage();
 }
+
