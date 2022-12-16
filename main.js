@@ -10,6 +10,11 @@ function updateResources() {
     //update freight car counts
     document.getElementById("hopperCarTotalCount").innerHTML = "Total hopper cars: " + data.rollingStock.freightCars.hopperCar.total;
     document.getElementById("hopperCarAvailableCount").innerHTML = "Available hopper cars: " + data.rollingStock.freightCars.hopperCar.available;
+
+    //update railyard stats
+    document.getElementById("railyardLanesCount").innerHTML = "Railyard lanes: " + data.buildingStats.railyard.lanes;
+    document.getElementById("railyardStorageCount").innerHTML = "Railyard lane storage: " + data.buildingStats.railyard.storage;
+
 }
 
 updateResources();
@@ -53,13 +58,14 @@ function switchRoute(amount) {
 
 //class for making a new route
 class newRoute {
-    constructor(name, legnth, carType, locomotives, freightCars, allocatedFuel) {
+    constructor(name, legnth, carType, locomotives, freightCars, allocatedFuel, currentStep) {
         this.name = name;
         this.legnth = legnth;
         this.carType = carType;
         this.locomotives = locomotives;
         this.freightCars = freightCars;
         this.allocatedFuel = allocatedFuel;
+        this.currentStep = currentStep;
     }
 }
 
@@ -79,7 +85,7 @@ function createRoute(name, displayedName, distance, carType, buttonName) {
 
         //update routes index
         routeNames[routeNames.length] = name;
-        routes[name] = new newRoute(displayedName, distance, carType, 0, 0, 0);
+        routes[name] = new newRoute(displayedName, distance, carType, 0, 0, 0, 0);
 
         //hide button
         document.getElementById(buttonName).style.display = "none";
