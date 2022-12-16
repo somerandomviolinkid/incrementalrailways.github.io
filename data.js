@@ -1,11 +1,13 @@
 let data = {
     resources: {
-        money: 650000,
+        money: 450000,
         fuel: 0,
-        totalEmployees:0
+        totalEmployees: 0,
+        availableEmployees: 0
     },
     rollingStock: {
         locomotives: {
+            totalLocomotives: 0,
             d1000: {
                 total: 0,
                 available: 0
@@ -18,7 +20,7 @@ let data = {
                 total: 0,
                 available: 0
             }
-        }, 
+        },
         freightCars: {
             hopperCar: {
                 total: 0,
@@ -29,7 +31,7 @@ let data = {
     buildingStats: {
         railyard: {
             lanes: 1,
-            storage: 10
+            space: 10
         },
         engineShed: {
             space: 1
