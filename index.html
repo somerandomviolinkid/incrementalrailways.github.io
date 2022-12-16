@@ -24,8 +24,7 @@
     </div>
     <div class="mainDiv">
         <h2>Routes</h2>
-        <button id="route1Button"
-            onclick="createRoute('coalMineToPowerPlant', 'Coal mine to power plant', 10, 'hopperCar', 'route1Button')">Create
+        <button id="route1Button" onclick="createRoute('coalMineToPowerPlant', 'Coal mine to power plant', 10, 'hopperCar', 'route1Button')">Create
             route from coal mine to power plant!<br>10 km, hopper cars<br>Costs: $20,000</button>
         <div id="routeInfo" class="subDiv">
             <h3 id="routeTitle"></h3>
@@ -78,6 +77,8 @@
         <div class="subDiv">
             <p id="moneyCount" class="stuffCount"></p>
             <p id="fuelCount" class="stuffCount"></p>
+            <p id="totalEmployeeCount" class="stuffCount"></p>
+            <p id="availableEmployeeCount" class="stuffCount"></p>
         </div>
     </div>
     <div id="settingsDiv" class="mainDiv">
@@ -88,10 +89,10 @@
         <button class="settingButton" onclick="uploadData()">Import data</button>
         <div class="subDiv">
             <h4>Things to note!!</h3>
-            <p id="info">You can only start utilizing a route after you have assigned at least 1 locomotive and 1 freight car and allocated some fuel to it.</p>
-            <div id="subNoteworthyDiv" target="_blank">
-                <a href="https://discord.gg/JYCJGyaZRJ">Discord</a>
-            </div>
+                <p id="info">You can only start utilizing a route after you have assigned at least 1 locomotive and 1 freight car and allocated some fuel to it.</p>
+                <div id="subNoteworthyDiv" target="_blank">
+                    <a href="https://discord.gg/JYCJGyaZRJ">Discord</a>
+                </div>
         </div>
     </div>
     <div class="bottomMainDiv">
@@ -99,6 +100,15 @@
     </div>
     <div class="bottomMainDiv">
         <h2>Research</h2>
+        <div class="subDiv">
+            <h3>Research Center</h3>
+            <button>Build research center</button>
+            <button>Upgrade research Center</button>
+        </div>
+        <div class="subDiv">
+            <h3>Research</h3>
+            <button>Research</button>
+        </div>
     </div>
 
 </body>
