@@ -1,6 +1,6 @@
 let data = {
     resources: {
-        money: 690000,
+        money: 650000,
         fuel: 0,
         totalEmployees:0
     },
