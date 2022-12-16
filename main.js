@@ -2,18 +2,20 @@ function updateResources() {
     //update resource counts
     document.getElementById("moneyCount").innerHTML = "Money: " + data.resources.money.toFixed(0);
     document.getElementById("fuelCount").innerHTML = "Fuel: " + data.resources.fuel.toFixed(2);
+    document.getElementById("totalEmployeeCount").innerHTML = "Total employees: " + data.resources.totalEmployees.toFixed(0) + " / " + data.buildingStats.headquarters.maxEmployees;
+    document.getElementById("availableEmployeeCount").innerHTML = "Available employees: " + data.resources.availableEmployees.toFixed(0);
 
     //update locomotive counts
-    document.getElementById("d1000TotalCount").innerHTML = "Total D1000's: " + data.rollingStock.locomotives.d1000.total;
+    document.getElementById("d1000TotalCount").innerHTML = "Total D1000's: " + data.rollingStock.locomotives.d1000.total + " / " + data.buildingStats.engineShed.space;
     document.getElementById("d1000AvailableCount").innerHTML = "Available D1000's: " + data.rollingStock.locomotives.d1000.available;
 
     //update freight car counts
-    document.getElementById("hopperCarTotalCount").innerHTML = "Total hopper cars: " + data.rollingStock.freightCars.hopperCar.total;
+    document.getElementById("hopperCarTotalCount").innerHTML = "Total hopper cars: " + data.rollingStock.freightCars.hopperCar.total + " / " + data.buildingStats.railyard.space;
     document.getElementById("hopperCarAvailableCount").innerHTML = "Available hopper cars: " + data.rollingStock.freightCars.hopperCar.available;
 
     //update railyard stats
     document.getElementById("railyardLanesCount").innerHTML = "Railyard lanes: " + data.buildingStats.railyard.lanes;
-    document.getElementById("railyardStorageCount").innerHTML = "Railyard lane storage: " + data.buildingStats.railyard.storage;
+    document.getElementById("railyardStorageCount").innerHTML = "Railyard lane storage: " + data.buildingStats.railyard.space;
 
 }
 
@@ -21,7 +23,7 @@ updateResources();
 
 //buy locomotive of your choice
 function buyLocomotive(locomotiveName) {
-    if (data.resources.money >= rollingStockStats.locomotiveStats[locomotiveName].cost) {
+    if (data.resources.money >= rollingStockStats.locomotiveStats[locomotiveName].cost && data.rollingStock.locomotives.totalLocomotives !== data.buildingStats.engineShed.space) {
         data.resources.money -= rollingStockStats.locomotiveStats[locomotiveName].cost;
         data.rollingStock.locomotives[locomotiveName].total++;
         data.rollingStock.locomotives[locomotiveName].available++;
@@ -164,5 +166,3 @@ function allocateFuel(amount) {
         updateRoutePage();
     }
 }
-
-
