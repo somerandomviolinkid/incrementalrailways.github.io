@@ -97,7 +97,7 @@ function depleteFuel2() {
 
 function gainProfit() {
     //profits!!
-    data.resources.money += (rollingStockStats.freightCarStats[routes[routeNames[routeNumber]]].maxWeight - rollingStockStats.freightCarStats[routes[routeNames[routeNumber]]].weight * routes[routeNames[routeNumber]].freightCars * 10);
+    data.resources.money += ((rollingStockStats.freightCarStats[routes[routeNames[routeNumber]].carType].maxWeight - rollingStockStats.freightCarStats[routes[routeNames[routeNumber]].carType].weight) * routes[routeNames[routeNumber]].freightCars * 10);
     updateResources();
 }
 
