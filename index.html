@@ -9,24 +9,24 @@
     <div class="mainDiv">
         <h2>Shop</h2>
         <div class="subDiv">
-            <h3>Locomotives</h3>
-            <button onclick="buyLocomotive('d1000')" class="shopButton">Buy d1000 locomotive<br>Costs $500,000</button>
+            <h3 class="shopTitles">Locomotives</h3>
+            <button onclick="buyLocomotive('d1000')" class="shopButton">Buy d1000 locomotive<br>Costs $300,000</button>
         </div>
         <div class="subDiv">
-            <h3>Freight cars</h3>
+            <h3 class="shopTitles">Freight cars</h3>
             <button onclick="buyFreightCar('hopperCar')" class="shopButton">Buy hopper car<br>Costs $120,000</button>
         </div>
 
         <div class="subDiv">
-            <h3>Fuel</h3>
+            <h3 class="shopTitles">Fuel</h3>
             <button onclick="buyFuel(1000)" class="shopButton">Buy 1,000 liters of fuel<br>Costs $10,000</button>
         </div>
     </div>
     <div class="mainDiv">
         <h2>Routes</h2>
         <button id="route1Button"
-            onclick="createRoute('coalMineToPowerPlant', 'Coal mine to power plant', 30, 'hopperCar', 'route1Button')">Create
-            route from coal mine to power plant!<br>30 km, hopper cars<br>Costs: $60,000</button>
+            onclick="createRoute('coalMineToPowerPlant', 'Coal mine to power plant', 10, 'hopperCar', 'route1Button')">Create
+            route from coal mine to power plant!<br>10 km, hopper cars<br>Costs: $20,000</button>
         <div id="routeInfo" class="subDiv">
             <h3 id="routeTitle"></h3>
             <p id="routeLegnth"></p>
@@ -60,13 +60,17 @@
         </div>
     </div>
     <div class="mainDiv">
-        <h2>Rolling stock</h2>
+        <h2>Railyard</h2>
         <div class="subDiv">
             <p id="d1000TotalCount" class="stuffCount"></p>
             <p id="d1000AvailableCount" class="stuffCount"></p>
             <hr>
             <p id="hopperCarTotalCount" class="stuffCount"></p>
             <p id="hopperCarAvailableCount" class="stuffCount"></p>
+        </div>
+        <div class="subDiv">
+            <p id="railyardLanesCount" class="stuffCount"></p>
+            <p id="railyardStorageCount" class="stuffCount"></p>
         </div>
     </div>
     <div class="mainDiv">
@@ -83,20 +87,26 @@
         <button class="settingButton" onclick="downloadData()">Export data</button>
         <button class="settingButton" onclick="uploadData()">Import data</button>
         <div class="subDiv">
-            <h3>Things to note!!</h3>
+            <h4>Things to note!!</h3>
             <p id="info">You can only start utilizing a route after you have assigned at least 1 locomotive and 1 freight car and allocated some fuel to it.</p>
             <div id="subNoteworthyDiv" target="_blank">
                 <a href="https://discord.gg/JYCJGyaZRJ">Discord</a>
             </div>
         </div>
     </div>
+    <div class="bottomMainDiv">
+        <h2>Headquarters</h2>
+    </div>
+    <div class="bottomMainDiv">
+        <h2>Research</h2>
+    </div>
 
 </body>
 
+<script src="rollingStockStats.js"></script>
 <script src="data.js"></script>
 <script src="routes.js"></script>
 <script src="main.js"></script>
-<script src="rollingStockStats.js"></script>
 <script src="saving.js"></script>
 <script src="train.js"></script>
 <script src="init.js"></script>
