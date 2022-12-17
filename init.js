@@ -17,4 +17,3 @@ if (routeNames.length == 1) {
 
     updateRoutePage();
 }
-
