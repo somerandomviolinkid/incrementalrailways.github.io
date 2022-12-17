@@ -81,9 +81,9 @@ function updateRoutePage() {
 
 //creates new routes
 function createRoute(name, displayedName, distance, carType, buttonName) {
-    if (data.resources.money >= distance * 2000) {
+    if (data.resources.money >= distance * 20000) {
         //purchase tracks
-        data.resources.money -= distance * 2000;
+        data.resources.money -= distance * 20000;
 
         //update routes index
         routeNames[routeNames.length] = name;
