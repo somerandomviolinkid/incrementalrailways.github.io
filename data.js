@@ -29,6 +29,14 @@ let data = {
         }
     },
     buildingStats: {
+        freightDepot: {
+            tracks: 1,
+            speed: 1
+        },
+        passengerStation: {
+            tracks: 1,
+            speed: 1
+        },
         railyard: {
             lanes: 1,
             space: 10
