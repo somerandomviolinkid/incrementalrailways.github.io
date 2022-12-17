@@ -134,7 +134,7 @@ function trainTravel1() {
         countdown((routes[routeNames[routeNumber]].legnth * 60) / rollingStockStats.locomotiveStats.d1000.topSpeed);
         countdownID = setInterval(countdown, 1000, ((routes[routeNames[routeNumber]].legnth * 60) / rollingStockStats.locomotiveStats.d1000.topSpeed));
         depleteFuel1();
-        depleteFuelID = setInterval(depleteFuel1, 1000);
+        depleteFuelID = setInterval(depleteFuel1, (60000 / rollingStockStats.locomotiveStats.d1000.topSpeed));
     }
 
     setTimeout(nextTask, (((routes[routeNames[routeNumber]].legnth) * 60000) / (rollingStockStats.locomotiveStats.d1000.topSpeed)));
@@ -173,7 +173,7 @@ function trainTravel2() {
         countdown((routes[routeNames[routeNumber]].legnth * 60) / rollingStockStats.locomotiveStats.d1000.topSpeed);
         countdownID = setInterval(countdown, 1000, ((routes[routeNames[routeNumber]].legnth * 60) / rollingStockStats.locomotiveStats.d1000.topSpeed));
         depleteFuel2();
-        depleteFuelID = setInterval(depleteFuel2, 1000);
+        depleteFuelID = setInterval(depleteFuel2, (60000 / rollingStockStats.locomotiveStats.d1000.topSpeed));
     }
 
     setTimeout(returnTrain, (((routes[routeNames[routeNumber]].legnth) * 60000) / (rollingStockStats.locomotiveStats.d1000.topSpeed)));
