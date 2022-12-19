@@ -6,73 +6,168 @@
 </header>
 
 <body>
-    <div class="mainDiv">
-        <h2>Shop</h2>
-        <div class="subDiv">
-            <h3 class="shopTitles">Locomotives</h3>
-            <button onclick="buyLocomotive('d1000')" class="shopButton">Buy d1000 locomotive<br>Costs $300,000</button>
+    <div class="tab">
+        <button class="tablinks" id="trainTabButton" onclick="openTab(event, 'trainsTab')">Trains</button>
+        <button class="tablinks" id="headquartersTabButton" onclick="openTab(event, 'headquartersTab')">Headquarters</button>
+        <button class="tablinks" id="shopTabButton" onclick="openTab(event, 'shopTab')">Shop</button>
+        <button class="tablinks" id="settingsTabButton" onclick="openTab(event, 'settingsTab')">Settings</button>
+    </div>
+    <div id="trainsTab" class="tabcontent">
+        <div class="mainDiv">
+            <h2>Train stations</h2>
+            <div class="subDiv">
+                <h3>Freight depot</h3>
+                <div class="subTrainStationDiv">
+                    <h4>Info</h4>
+                    <div id="freightProgress">
+                        <div id="freightProgressBar"></div>
+                    </div>
+                    <button id="buildFreightDepot" onclick="buildFreightDepot()">Build freight depot<br>Free!</button>
+                    <button id="collectFeesButton" onclick="freightFees()">Collect fees</button>
+                    <p class="freightDepotStats" id="freightDepotSpeed"></p>
+                    <p class="freightDepotStats" id="freightDepotSize"></p>
+                    <p class="freightDepotStats" id="freightDepotTracks"></p>
+                </div>
+                <div id="freightDepotUpgradesDiv" class="subTrainStationDiv">
+                    <h4>Upgrades</h4>
+                    <button id="upgradeFreightDepotSpeed1" onclick="upgradeFreightDepot('upgradeFreightDepotSpeed1', 'speed', 200, 'upgradeFreightDepotSize1')">Upgrade freight depot speed<br>Costs: $200</button>
+                    <button id="upgradeFreightDepotSpeed2">Upgrade freight depot speed<br>Costs: $500</button>
+                    <button id="upgradeFreightDepotSpeed3">Upgrade freight depot speed<br>Costs: $500</button>
+                    <button id="upgradeFreightDepotSpeed4">Upgrade freight depot speed<br>Costs: $500</button>
+                    <button id="upgradeFreightDepotSize1" onclick="upgradeFreightDepot('upgradeFreightDepotSize1', 'size', 500, 'upgradeFreightDepotTrack1')">Upgrade freight depot size<br>Costs: $500</button>
+                    <button id="upgradeFreightDepotSize2">Upgrade freight depot size<br>Costs: $500</button>
+                    <button id="upgradeFreightDepotSize3">Upgrade freight depot size<br>Costs: $500</button>
+                    <button id="upgradeFreightDepotSize4">Upgrade freight depot size<br>Costs: $500</button>
+                    <button id="upgradeFreightDepotTrack1" onclick="upgradeFreightDepot('upgradeFreightDepotTrack1', 'tracks', 1200)">Upgrade freight depot tracks<br>Costs: $1,200</button>
+                    <button id="upgradeFreightDepotTrack2">Upgrade freight depot tracks<br>Costs: $500</button>
+                    <button id="upgradeFreightDepotTrack3">Upgrade freight depot tracks<br>Costs: $500</button>
+                    <button id="upgradeFreightDepotTrack4">Upgrade freight depot tracks<br>Costs: $500</button>
+                </div>
+            </div>
+            <div class="subDiv">
+                <h3>Passenger station</h3>
+                <button>Build passenger station</button>
+                <button>Upgrade passenger station tracks</button>
+                <button>Upgrade passenger station size</button>
+            </div>
         </div>
-        <div class="subDiv">
-            <h3 class="shopTitles">Freight cars</h3>
-            <button onclick="buyFreightCar('hopperCar')" class="shopButton">Buy hopper car<br>Costs $120,000</button>
+        <div id="railyardDiv" class="mainDiv">
+            <h2>Railyard</h2>
+            <div class="subDiv">
+                <p id="d1000TotalCount" class="stuffCount"></p>
+                <p id="d1000AvailableCount" class="stuffCount"></p>
+                <hr>
+                <p id="hopperCarTotalCount" class="stuffCount"></p>
+                <p id="hopperCarAvailableCount" class="stuffCount"></p>
+            </div>
+            <div class="subDiv">
+                <p id="railyardLanesCount" class="stuffCount"></p>
+                <p id="railyardStorageCount" class="stuffCount"></p>
+            </div>
+        </div>
+        <div class="mainDiv">
+            <h2>Routes</h2>
+            <button id="route1Button"
+                onclick="createRoute('coalMineToPowerPlant', 'Coal mine to power plant', 10, 'hopperCar', 'route1Button')">Create
+                route from coal mine to power plant!<br>10 km, hopper cars<br>Costs: $20,000</button>
+            <div id="routeInfo" class="subDiv">
+                <h3 id="routeTitle"></h3>
+                <p id="routeLegnth"></p>
+                <p id="routeFuel"></p>
+                <div class="subRouteDiv">
+                    <p id="locomotiveCount" class="routeInfoP"></p>
+                    <button class="addRollingStockButton" onclick="addLocomotive('d1000')">+</button>
+                    <button class="addRollingStockButton" onclick="removeLocomotive('d1000')">-</button>
+                </div>
+
+                <div class="subRouteDiv">
+                    <p id="freightCarCount" class="routeInfoP"></p>
+                    <button class="addRollingStockButton" onclick="addFreightCar('hopperCar')">+</button>
+                    <button class="addRollingStockButton" onclick="removeFreightCar('hopperCar')">-</button>
+                </div>
+
+                <div class="subRouteDiv">
+                    <p id="allocatedFuelCount" class="routeInfoP"></p>
+                    <button class="addRollingStockButton" onclick="allocateFuel(1000)">+</button>
+                </div>
+
+                <div class="subRouteDiv" id="routeControlDiv">
+                    <button id="routeStep1" onclick="loadTrain()" class="routeControlButton">Load train</button>
+                    <button id="routeStep2" onclick="dispatchTrain1()" class="routeControlButton">Dispatch
+                        train</button>
+                    <button id="routeStep3" onclick="trainTravel1()" class="routeControlButton">Drive train</button>
+                    <button id="routeStep4" onclick="unloadTrain()" class="routeControlButton">Unload train</button>
+                    <button id="routeStep5" onclick="dispatchTrain2()" class="routeControlButton">Dispatch
+                        train</button>
+                    <button id="routeStep6" onclick="trainTravel2()" class="routeControlButton">Drive train</button>
+                    <p id="countdownTimer"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="headquartersTab" class="tabcontent">
+        <div id="headquartersDiv" class="mainDiv">
+            <h2>Headquarters</h2>
+            <div class="subDiv">
+                <h3>Employees</h3>
+            </div>
+        </div>
+        <div id="researchCenterDiv" class="mainDiv">
+            <h2>Research</h2>
+            <div class="subDiv">
+                <h3>Research Center</h3>
+                <button>Build research center</button>
+                <button>Upgrade research Center</button>
+            </div>
+            <div class="subDiv">
+                <h3>Research</h3>
+                <button>Research</button>
+            </div>
+        </div>
+    </div>
+    <div id="shopTab" class="tabcontent">
+        <div class="mainDiv">
+            <h2>Locomotives</h2>
+
+            <button onclick="buyLocomotive('d1000')" class="shopButton">Buy d1000 locomotive<br>Costs
+                $300,000</button>
+            <button onclick="buyLocomotive('d1000')" class="shopButton">Buy d1010 locomotive<br>Costs
+                $550,000</button>
+            <button onclick="buyLocomotive('d1000')" class="shopButton">Buy d1020 locomotive<br>Costs
+                $1,000,000</button>
+        </div>
+        <div class="mainDiv">
+            <h2>Freight cars</h2>
+            <button onclick="buyFreightCar('hopperCar')" class="shopButton">Buy hopper car<br>Costs
+                $120,000</button>
         </div>
 
-        <div class="subDiv">
-            <h3 class="shopTitles">Fuel</h3>
+        <div class="mainDiv">
+            <h2>Fuel</h2>
             <button onclick="buyFuel(1000)" class="shopButton">Buy 1,000 liters of fuel<br>Costs $10,000</button>
         </div>
     </div>
-    <div class="mainDiv">
-        <h2>Routes</h2>
-        <button id="route1Button" onclick="createRoute('coalMineToPowerPlant', 'Coal mine to power plant', 10, 'hopperCar', 'route1Button')">Create
-            route from coal mine to power plant!<br>10 km, hopper cars<br>Costs: $200,000</button>
-        <div id="routeInfo" class="subDiv">
-            <h3 id="routeTitle"></h3>
-            <p id="routeLegnth"></p>
-            <p id="routeFuel"></p>
-            <div class="subRouteDiv">
-                <p id="locomotiveCount" class="routeInfoP"></p>
-                <button class="addRollingStockButton" onclick="addLocomotive('d1000')">+</button>
-                <button class="addRollingStockButton" onclick="removeLocomotive('d1000')">-</button>
-            </div>
-
-            <div class="subRouteDiv">
-                <p id="freightCarCount" class="routeInfoP"></p>
-                <button class="addRollingStockButton" onclick="addFreightCar('hopperCar')">+</button>
-                <button class="addRollingStockButton" onclick="removeFreightCar('hopperCar')">-</button>
-            </div>
-
-            <div class="subRouteDiv">
-                <p id="allocatedFuelCount" class="routeInfoP"></p>
-                <button class="addRollingStockButton" onclick="allocateFuel(1000)">+</button>
-            </div>
-
-            <div class="subRouteDiv" id="routeControlDiv">
-                <button id="routeStep1" onclick="loadTrain()" class="routeControlButton">Load train</button>
-                <button id="routeStep2" onclick="dispatchTrain1()" class="routeControlButton">Dispatch train</button>
-                <button id="routeStep3" onclick="trainTravel1()" class="routeControlButton">Drive train</button>
-                <button id="routeStep4" onclick="unloadTrain()" class="routeControlButton">Unload train</button>
-                <button id="routeStep5" onclick="dispatchTrain2()" class="routeControlButton">Dispatch train</button>
-                <button id="routeStep6" onclick="trainTravel2()" class="routeControlButton">Drive train</button>
-                <p id="countdownTimer"></p>
+    </div>
+    <div id="settingsTab" class="tabcontent">
+        <div id="settingsDiv" class="mainDiv">
+            <h2>Settings</h2>
+            <button class="settingButton" onclick="saveData()">Save data</button>
+            <button class="settingButton" onclick="resetData()">Reset data</button>
+            <button class="settingButton" onclick="downloadData()">Export data</button>
+            <button class="settingButton" onclick="uploadData()">Import data</button>
+            <div class="subDiv">
+                <h4>Things to note!!</h3>
+                    <p id="info">You can only start utilizing a route after you have assigned at least 1 locomotive and
+                        1 freight car and allocated some fuel to it.</p>
+                    <h4>Credits!!</h4>
+                    <p id="info">Bobby (developer)<br>w3schools.com (copy/pasted code)</p>
+                    <div id="subNoteworthyDiv" target="_blank">
+                        <a href="https://discord.gg/JYCJGyaZRJ">Discord</a>
+                    </div>
             </div>
         </div>
     </div>
-    <div class="mainDiv">
-        <h2>Railyard</h2>
-        <div class="subDiv">
-            <p id="d1000TotalCount" class="stuffCount"></p>
-            <p id="d1000AvailableCount" class="stuffCount"></p>
-            <hr>
-            <p id="hopperCarTotalCount" class="stuffCount"></p>
-            <p id="hopperCarAvailableCount" class="stuffCount"></p>
-        </div>
-        <div class="subDiv">
-            <p id="railyardLanesCount" class="stuffCount"></p>
-            <p id="railyardStorageCount" class="stuffCount"></p>
-        </div>
-    </div>
-    <div class="mainDiv">
+    <div id="resourcesDiv" class="mainDiv">
         <h2>Resources</h2>
         <div class="subDiv">
             <p id="moneyCount" class="stuffCount"></p>
@@ -81,53 +176,9 @@
             <p id="availableEmployeeCount" class="stuffCount"></p>
         </div>
     </div>
-    <div id="settingsDiv" class="mainDiv">
-        <h2>Settings</h2>
-        <button class="settingButton" onclick="saveData()">Save data</button>
-        <button class="settingButton" onclick="resetData()">Reset data</button>
-        <button class="settingButton" onclick="downloadData()">Export data</button>
-        <button class="settingButton" onclick="uploadData()">Import data</button>
-        <div class="subDiv">
-            <h4>Things to note!!</h3>
-                <p id="info">You can only start utilizing a route after you have assigned at least 1 locomotive and 1 freight car and allocated some fuel to it.</p>
-                <div id="subNoteworthyDiv" target="_blank">
-                    <a href="https://discord.gg/JYCJGyaZRJ">Discord</a>
-                </div>
-        </div>
-    </div>
-    <div class="bottomMainDiv">
-        <h2>Headquarters</h2>
-        <div class="subDiv">
-            <h3>Employees</h3>
-            <button>Hire employees</button>
-        </div>
-        <div class="subDiv">
-            <h3>Freight depot</h3>
-            <button>Build freight depot</button>
-            <button>Upgrade freight depot tracks</button>
-            <button>Upgrade freight depot speed</button>
-        </div>
-        <div class="subDiv">
-            <h3>Passenger station</h3>
-            <button>Build passenger station</button>
-            <button>Upgrade passenger station tracks</button>
-            <button>Upgrade passenger station size</button>
-        </div>
-    </div>
-    <div class="bottomMainDiv">
-        <h2>Research</h2>
-        <div class="subDiv">
-            <h3>Research Center</h3>
-            <button>Build research center</button>
-            <button>Upgrade research Center</button>
-        </div>
-        <div class="subDiv">
-            <h3>Research</h3>
-            <button>Research</button>
-        </div>
-    </div>
 
 </body>
+
 
 <script src="rollingStockStats.js"></script>
 <script src="data.js"></script>
@@ -135,6 +186,8 @@
 <script src="main.js"></script>
 <script src="saving.js"></script>
 <script src="train.js"></script>
+<script src="research.js"></script>
+<script src="page.js"></script>
 <script src="init.js"></script>
 
 </html>
