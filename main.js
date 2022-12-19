@@ -23,7 +23,7 @@ updateResources();
 
 //buy locomotive of your choice
 function buyLocomotive(locomotiveName) {
-    if (data.resources.money >= rollingStockStats.locomotiveStats[locomotiveName].cost && data.rollingStock.locomotives.totalLocomotives !== data.buildingStats.engineShed.space) {
+    if (data.resources.money >= rollingStockStats.locomotiveStats[locomotiveName].cost) {
         data.resources.money -= rollingStockStats.locomotiveStats[locomotiveName].cost;
         data.rollingStock.locomotives[locomotiveName].total++;
         data.rollingStock.locomotives[locomotiveName].available++;
@@ -81,9 +81,9 @@ function updateRoutePage() {
 
 //creates new routes
 function createRoute(name, displayedName, distance, carType, buttonName) {
-    if (data.resources.money >= distance * 20000) {
+    if (data.resources.money >= distance * 2000) {
         //purchase tracks
-        data.resources.money -= distance * 20000;
+        data.resources.money -= distance * 2000;
 
         //update routes index
         routeNames[routeNames.length] = name;
@@ -102,7 +102,7 @@ function createRoute(name, displayedName, distance, carType, buttonName) {
     }
 }
 
-//adds locomotives to selected routes (adding locomotives grants diminishing returns to maximum car amount and top speed)
+//adds locomotives to selected routes (adding locomotives grants diminishing returns to maximum car amount and fuel efficiency)
 function addLocomotive(type) {
     if (data.rollingStock.locomotives[type].available >= 1) {
         data.rollingStock.locomotives[type].available--;
@@ -116,6 +116,7 @@ function addLocomotive(type) {
     }
 }
 
+//remove locomotive
 function removeLocomotive(type) {
     if (routes[routeNames[routeNumber]].locomotives >= 1) {
         data.rollingStock.locomotives[type].available++;
@@ -128,7 +129,7 @@ function removeLocomotive(type) {
     }
 }
 
-
+//add freight car
 function addFreightCar(type) {
     if (data.rollingStock.freightCars[type].available >= 1) {
         data.rollingStock.freightCars[type].available--;
@@ -142,6 +143,7 @@ function addFreightCar(type) {
     }
 }
 
+//remove freight car
 function removeFreightCar(type) {
     if (routes[routeNames[routeNumber]].freightCars >= 1) {
         data.rollingStock.freightCars[type].available++;
@@ -154,6 +156,7 @@ function removeFreightCar(type) {
     }
 }
 
+//allocate fuel to route
 function allocateFuel(amount) {
     if (data.resources.fuel >= amount && routes[routeNames[routeNumber]].allocatedFuel + amount <= rollingStockStats.locomotiveStats.d1000.fuelCapacity * routes[routeNames[routeNumber]].locomotives) {
         data.resources.fuel -= amount;
@@ -164,5 +167,64 @@ function allocateFuel(amount) {
         }
         updateResources();
         updateRoutePage();
+    }
+}
+
+//freight depot stuff
+function updateFreightDepotInfo() {
+    document.getElementById("freightDepotSpeed").innerHTML = "Speed: " + data.buildingStats.freightDepot.speed;
+    document.getElementById("freightDepotSize").innerHTML = "Size: " + data.buildingStats.freightDepot.size;
+    document.getElementById("freightDepotTracks").innerHTML = "Tracks: " + data.buildingStats.freightDepot.tracks;
+}
+
+function freightFees() {
+    moveFreightProgressBar();
+    data.resources.money += 100 * data.buildingStats.freightDepot.speed * data.buildingStats.freightDepot.size;
+    updateResources();
+}
+
+function stopFreightTimer() {
+    clearInterval(progress1ID);
+    progress1 = 0;
+    document.getElementById("collectFeesButton").style.display = "block";
+}
+
+let freightFeesID;
+
+function buildFreightDepot() {
+    document.getElementById("buildFreightDepot").style.display = "none";
+
+    document.getElementById("freightProgress").style.display = "block";
+    document.getElementById("collectFeesButton").style.display = "block";
+    document.getElementById("freightDepotUpgradesDiv").style.display = "block";
+    document.getElementById("upgradeFreightDepotSpeed1").style.display = "block";
+
+    moveFreightProgressBar();
+
+    data.buildingStats.freightDepot.built = true;
+
+    updateFreightDepotInfo();
+}
+
+function upgradeFreightDepot(buttonName, target, cost, unlock) {
+    if (data.resources.money >= cost) {
+        data.resources.money -= cost;
+        data.buildingStats.freightDepot[target]++;
+
+        if (target == 'tracks') {
+            highlightTab('headquartersTabButton');
+        }
+
+        clearInterval(progress1ID);
+        progress1 = 0;
+        moveFreightProgressBar();
+
+        document.getElementById(buttonName).style.display = "none";
+        if (unlock) {
+            document.getElementById(unlock).style.display = "block";
+        }
+
+        updateResources();
+        updateFreightDepotInfo();
     }
 }
