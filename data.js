@@ -1,6 +1,6 @@
 let data = {
     resources: {
-        money: 450000,
+        money: 0,
         fuel: 0,
         totalEmployees: 0,
         availableEmployees: 0
@@ -30,27 +30,53 @@ let data = {
     },
     buildingStats: {
         freightDepot: {
+            built: false,
+            size: 1,
+            speed: 1,
             tracks: 1,
-            speed: 1
+            upgrades: {
+                speed1: false,
+                speed2: false,
+                speed3: false,
+                speed4: false,
+                size1: false,
+                size2: false,
+                size3: false,
+                size4: false,
+                track1: false,
+                track2: false,
+                track3: false,
+                track4: false
+            }
         },
         passengerStation: {
             tracks: 1,
-            speed: 1
+            size: 1,
+            researched: false,
+            built: false
         },
         railyard: {
             lanes: 1,
-            space: 10
+            space: 10,
+            researched: false,
+            built: false
         },
         engineShed: {
-            space: 1
+            space: 1,
+            researched: false,
+            built: false
         },
         maintenenceCenter: {
             space: 3,
-            repairTime: 120
+            repairTime: 120,
+            researched: false,
+            built: false
         },
         headquarters: {
             dispatchingTime: 10,
-            maxEmployees: 5
+            maxEmployees: 5,
+            researched: false,
+            built: false
         }
     }
 }
